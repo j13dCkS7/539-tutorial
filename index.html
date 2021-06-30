@@ -11,7 +11,32 @@
 <p>The first step is to convert Arabic script into the Latin alphabet. The Link Grammar parser uses a one-to-one correspondence between the Arabic letters and some glyph from the standard Latin alphabet, using lowercase and capital letters, and some punctuation to represent all of the letters of the Persian alphabet (see https://jon.dehdari.org/persian_nlp/persian_charmaps.pdf). One problem with this step is that of the Zero-Width Non-Joiner character (or ZWNJ), which allows two letters to be juxtaposed without joining as they would normally (Arabic letters usually join to either/both the preceding or/and following letters). It is used to separate some grammatical markers from the stems they are attached to and between the members of a compound word. The ZWNJ is converted to a hyphen character during this step.</p>
 <p>The next step is to determine where ezafes are needed throughout the text. The ezafe is simply the vowel /e/. It is suffixed onto various elements of noun phrases as a linking device. The problem is that ezafes are not always explicit in the text. In certain environments they are visible as the letter ‘yeh’, but more often they are unwritten, and the reader must deduce their position from the context. By making them explicit in pre-processing, the design of the parser grammar can be simplified (no deduction needed).</p>
 <p>The last step in pre-processing is ezafe-formatting and morpheme-splitting. First, all ezafes must be written the same way, using the Latin letter ‘e’. For example, if the ezafe is explicit in the text as the Arabic letter ‘yeh’, this corresponds to the Latin letter ‘i’. In order to make all ezafe uniform, we rewrite them all as the Latin letter ‘e’. Next, all inflectional affixes need to be split up with spaces. The parser grammar cannot do this and will ignore important morphological information if a word is not broken up. Let’s look at an example that illustrates all the stages of pre-processing:</p>
-<h2>TABLE GOES HERE</h2>
+<table>
+  <tr>
+    <td>Original text</td>
+    <td>من کتاب‌های بزرگ شما‌را نمی‌خواندم.</td>
+  </tr>
+  <tr>
+    <td>Gloss/translation</td>
+    <td>mæn  [ketɑb.hɑ.ye  bozorg.e  šomɑ].rɑ  ne.mi.xɑn.d.æm // I  [book.PL.EZ  big.EZ  you]-ACC  NEG.CNT.read.PST.1SG // 'I was not reading your big books.'</td>
+  </tr>
+  <tr>
+    <td>Arabic to Latin characters</td>
+    <td>mn ktAb-hAi bzrg CmA-rA nmi-xuAndm.</td>
+  </tr>
+  <tr>
+    <td>Insert implicit ezafe</td>
+    <td>mn ktAb-hAi bzrge CmA-rA nmi-xuAndm.</td>
+  </tr>
+  <tr>
+    <td>Format ezafe</td>
+    <td>mn ktAb-hAe bzrge CmA-rA nmi-xuAndm.</td>
+  </tr>
+  <tr>
+    <td>Split morphemes with spaces</td>
+    <td>mn ktAb hA e bzrg e CmA rA n mi xuAn d m .</td>
+  </tr>
+</table>
 <p>EZ = ezafe, CNT = continuous, PST = past, PL = plural, ACC = accusative, NEG = negative, 1SG = first person singular</p>
 <p>In the gloss, the brackets surround the object NP to make it easier to see. The accusative suffix attaches to the NP as whole: it’s an enclitic. Using Dehdari’s list of character correspondences, the Arabic letters are switched out for Latin characters. Next, based on knowledge of Persian, one implicit/unwritten ezafe is needed after ‘bzrg’. Next, all ezafes are rewritten as ‘e’, so the first one after ‘ktAb-hA’ is changed from ‘i’ to ‘e’. Lastly, all morphemes are split using spaces (most ZWNJ will also become spaces). We now have text that the parser can accept as input.</p>
 <h3>Setting up the parser in Linux</h3>
