@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <style>
+    <!--
+      .tab { margin-left: 40px; }
+    -->
+  </style>
+</head>
 <body>
 <h2>A Link Grammar Parser for Persian</h2>
 <h3>Introduction</h3>
@@ -42,7 +49,7 @@
 <h3>Setting up the parser in Linux</h3>
 <p>The Link Grammar parser file (link-grammar-5.9.1.tar.gz) can be downloaded from http://www.abisource.com/downloads/link-grammar/current/. You will need to be able to navigate to the directory that you extract the file contents to. Using terminal, navigate to this directory using the ‘cd’ command (as a default it will be named ‘link-grammar-5.9.1’). The README.md file at https://github.com/opencog/link-grammar details how to create the Link Parser system in Linux; all commands can be done from the terminal once you have navigated to the correct directory.</p>
 <p>Once the parsing system has been created, navigate to the link-grammar-5.9.1/data/fa subdirectory. This is the Persian language folder, containing all of the files necessary to run the Persian Link Parser. One of the files is named ‘4.0.dict’. This is the grammar file for Persian. Similar files exist for the other languages in the link-grammar-5.9.1/data directory. To make the ‘dict’ file work correctly with the Latin script input, this line of code needs to be removed towards the beginning:</p>
-<p>#define dictionary-locale fa_IR.UTF-8;</p>
+<p class="tab">#define dictionary-locale fa_IR.UTF-8;</p>
 <p>The semicolon from the previous line (defining the dictionary version) should also be deleted. This will cause the parser to default to the en_US.UTF-8 character set.</p>
 <p>Now you are ready to use the parser. Navigate to the ‘link-grammar-5.9.1’ directory as before, and type ‘link-parser fa’. The system will search for the ‘dict’ file for Persian and open the parser. On my own system, I extracted the parser files to a different directory - apart from this, the opening text on your system should be identical to this:</p>
 <h2>PICTURE OF INITIAL INPUT GOES HERE</h2>
