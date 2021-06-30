@@ -156,5 +156,9 @@
   <td>m.vmp</td>
 </tr>
 </table>
+<p>The grammar file for Persian also presents some issues. These include relative clauses, ambiguity with past participles, and appellatives. Dehdari includes a list of some other problems at the beginning of the ‘dict’ file.</p>
+<p>Both relative clauses and complementizer clauses in Persian are introduced by the complementizer ‘keh’. When ‘keh’ introduces a complementizer clause, there is no issue, the parser connects the subordinated sentence to the matrix clause by conjoining their VMP links. However, when used to introduce a relative clause, it seems to ignore ‘keh’ altogether.</p>
+<p>Past participles can be used as in English – together with an auxiliary verb to produce perfect tenses, or as adjectives. The grammar analyzes all cases of the past participle to be of the former category. When the parser is fed a sentence that connects an adjectival past participle to a noun with ezafe, the ezafe is ignored and the participle is conjoined to some other element.</p>
+<p>Appellatives are vocative-like instances of nouns, used to draw in the listener/reader’s attention or to convey respect. They are used frequently in spoken Persian. Their use mid-sentence is enough to throw the parser off completely, but as independent utterances, they lead us to another issue with the grammar file: the fact that the parser cannot handle input that does not constitute a sentence in Persian. Any input that does not contain the minimal elements (i.e. a conjugated verb) of a sentence is rejected outright by the parser.</p>
 </body>
 </html>
