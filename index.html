@@ -58,6 +58,33 @@
 <p>Use the example sentence from the pre-processing section to test the parser. The output should be:</p>
 <img class="tab" src="/539-tutorial/parseexp1.png" alt="first parsing example">
 <p>If the parser finds more than one tree for the given sentence, click enter/return to see the alternate trees, as above.</p>
-<h2>ANALYSIS SECTION GOES HERE</h2>
+<h3>Analysis</h3>
+<p>The parser can be analyzed from two directions: from the Persian-specific dictionary file (which contains the language-specific grammar instructions), or from the general parser program file written in C (which contains the algorithm for link-building). The parser engine was designed to be a link-finder – it is not language specific. It is up to the author of the ‘dict’ file to ensure that links are well-defined for the syntax (and morphology) of a given language, and that the associated word-lists (for open-class parts-of-speech) are comprehensive.</p>
+<p>The parser program works from left to right, exhausting any possible links from the current word going rightward. In other words, it employs a sequential search algorithm of complexity O(n-1). In sequential search, a program looks at each item in a sequence to see if a given condition holds. This program does not incorporate statistical machine learning, so the probability that the condition holds in any one position is the same for each position. If such a position does not exist in a sequence of n elements, it will take n-1 comparisons to discover this. Any links found by the parser are tabulated into a list and can be accessed using the C command:</p>
+<p class="tab">linkage_print_links_and_domains()</p>
+<p>For example, the Persian sentence used above would generate a table like:</p>
+<table class="tab">
+<tr>
+  <td>/////</td>
+  <td>Wd</td>
+  <td><---Wd---></td>
+  <td>Wd</td>
+  <td>m.vmp</td>
+</tr>
+<tr>
+  <td>mn.pn</td>
+  <td>Spn1</td>
+  <td><---Spn1---></td>
+  <td>Spn1</td>
+  <td>m.vmp</td>
+</tr>
+<tr>
+  <td>ktAb.n</td>
+  <td>NMSp</td>
+  <td><---NMSp---></td>
+  <td>NMSp</td>
+  <td>hA.nms</td>
+</tr>
+</table>
 </body>
 </html>
